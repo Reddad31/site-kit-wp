@@ -19,7 +19,7 @@
 /**
  * Internal dependencies
  */
-const { isImported } = require( '../utils' );
+const { isImported, isFunction } = require( '../utils' );
 
 module.exports = {
 	create( context ) {
@@ -105,10 +105,18 @@ module.exports = {
 					// case-insensitive match.
 					if ( acronymMatches ) {
 						const acronymMatch = acronymMatches[ 0 ];
-						// The acronym was found in the variable with the correct capitalization, so
-						// this variable is good.
+
+						// The acronym was found in the variable with the correct capitalization
 						if ( acronymMatch === acronym ) {
-							return;
+							// or if the acronym is not at the start
+							if ( ! name.startsWith( acronym ) ) {
+								return;
+							}
+							// If the acronym is at the start and it is a function
+							if ( isFunction( node ) ) {
+								console.log( { name } );
+								return;
+							}
 						}
 
 						// If the acronym was found entirely lowercased, skip this check.

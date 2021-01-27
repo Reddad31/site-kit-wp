@@ -55,8 +55,21 @@ export function FancyComponent() {
 		},
 		{
 			code: `
-// name starts with acronym, must be lower cased
 const htmlNode = '<div></div>';
+			`,
+		},
+		{
+			code: `
+function HTMLButtonComponent( { label } ) {
+	return '<button>{ label }</button>';
+}
+`,
+		},
+		{
+			code: `
+function urlParser(url) {
+	return new window.URL(url);
+}
 			`,
 		},
 	],
